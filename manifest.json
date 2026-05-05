@@ -1,0 +1,25 @@
+{
+  "name": "Caronômetro!",
+  "short_name": "Caronômetro",
+  "description": "Controle mensal de caronas — marque quem deu carona em cada dia.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a0533",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
