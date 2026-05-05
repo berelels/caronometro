@@ -31,6 +31,7 @@ Decidi compartilhá-lo publicamente porque acredito que mais pessoas passam pela
 - 📊 **Estatísticas automáticas** — contagem de caronas por pessoa no mês
 - 💾 **Armazenamento local** — seus dados ficam no próprio dispositivo (sem servidor)
 - 📲 **Instalável como app** — funciona offline após instalado
+> **💡 Primeiros passos:** O app já vem com algumas pessoas de exemplo cadastradas (Camila, Luna e Manu). Fique à vontade para removê-las e adicionar os nomes que fazem sentido pra você — basta tocar no ícone de ⚙️ configurações no canto superior direito!
 
 ---
 
