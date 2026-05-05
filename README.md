@@ -15,11 +15,11 @@
 
 ## 💜 A história por trás do app
 
-Esse app nasceu de um propósito bem simples: **organizar as caronas do dia a dia com uma pessoa especial.**
+Esse app nasceu de um propósito bem simples: **organizar as caronas do dia a dia.**
 
 Quando você divide o trajeto toda semana com alguém, as contas de "quem foi hoje?" começam a se perder. O Caronômetro surgiu como uma solução carinhosa pra isso — um calendário visual onde você marca, a cada dia, quem deu a carona.
 
-Decidi compartilhá-lo publicamente porque acredito que mais pessoas passam pela mesma situação, seja com colegas de trabalho, vizinhos, amigos ou alguém especial. Espero que seja tão útil pra você quanto foi pra mim. 🙂
+Decidi compartilhá-lo publicamente porque acredito que mais pessoas passam pela mesma situação, seja com colegas de trabalho, amigos ou alguém especial. Espero que seja tão útil pra você quanto foi pra mim. 🙂
 
 ---
 
@@ -32,6 +32,8 @@ Decidi compartilhá-lo publicamente porque acredito que mais pessoas passam pela
 - 💾 **Armazenamento local** — seus dados ficam no próprio dispositivo (sem servidor)
 - 📲 **Instalável como app** — funciona offline após instalado
 > **💡 Primeiros passos:** O app já vem sem usuários. Fique à vontade para removê-los e adicioná-los — basta tocar no ícone de ⚙️ configurações no canto superior direito!
+
+> **💡 Primeiros passos:** O app já vem com algumas pessoas de exemplo cadastradas (Camila, Luna e Manu). Fique à vontade para removê-las e adicionar os nomes que fazem sentido pra você — basta tocar no ícone de ⚙️ configurações no canto superior direito!
 
 ---
 
