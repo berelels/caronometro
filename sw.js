@@ -1,4 +1,4 @@
-const CACHE_NAME = 'caronometro-v1';
+const CACHE_NAME = 'caronometro-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -25,8 +25,16 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
+// Network-first: sempre tenta a rede antes de usar o cache
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(cached => cached || fetch(event.request))
+    fetch(event.request)
+      .then(response => {
+        // Atualiza o cache com a versão mais recente
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return response;
+      })
+      .catch(() => caches.match(event.request)) // fallback para cache se offline
   );
 });

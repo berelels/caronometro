@@ -12,7 +12,6 @@
     <link rel="apple-touch-icon" href="icon-512.png">
     <link rel="manifest" href="manifest.json">
     <title>Caronômetro!</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -23,13 +22,13 @@
 
 <body>
     <div class="app-container">
+
         <!-- Header -->
         <div class="header">
             <div class="header-titles">
                 <h1>Caronômetro!</h1>
                 <div class="subtitle">Controle de Caronas</div>
             </div>
-            <!-- Botão de Configurações -->
             <button class="settings-btn" id="openSettings" title="Gerenciar Pessoas">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -41,74 +40,336 @@
             </button>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Month Selector -->
-            <div class="month-selector">
-                <button class="month-btn" id="prevMonth">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <div class="month-name" id="currentMonth"></div>
-                <button class="month-btn" id="nextMonth">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
+        <!-- Tab Content -->
+        <div class="tab-content">
+
+            <!-- ===== TAB: CALENDÁRIO ===== -->
+            <div class="tab-pane active" id="tabCalendar">
+                <div class="main-content">
+                    <div class="month-selector">
+                        <button class="month-btn" id="prevMonth">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <div class="month-name" id="currentMonth"></div>
+                        <button class="month-btn" id="nextMonth">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="calendar-grid" id="calendar"></div>
+                </div>
+                <div class="footer">
+                    <div class="stats-container" id="statsContainer"></div>
+                    <button class="btn-primary btn-danger" id="clearMonth">🗑️ Limpar Mês</button>
+                </div>
             </div>
 
-            <!-- Calendar Grid -->
-            <div class="calendar-grid" id="calendar"></div>
-        </div>
+            <!-- ===== TAB: ESTATÍSTICAS ===== -->
+            <div class="tab-pane" id="tabStats">
+                <div class="tab-scroll">
+                    <div class="stats-month-header">
+                        <div class="stats-month-label" id="statsMonthName"></div>
+                        <div class="stats-month-nav">
+                            <button class="month-btn" id="statsPrevMonth">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </button>
+                            <button class="month-btn" id="statsNextMonth">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
 
-        <!-- Footer with Stats -->
-        <div class="footer">
-            <div class="stats-container" id="statsContainer">
-                <!-- Estatísticas geradas via JS -->
+                    <!-- Totais -->
+                    <div class="stat-totals-grid" id="statsTotals"></div>
+
+                    <!-- Ranking -->
+                    <div class="routes-section">
+                        <div class="section-header">🏆 Ranking de Caronas</div>
+                        <div id="statsRanking"></div>
+                    </div>
+
+                    <!-- Detalhes por tipo -->
+                    <div class="routes-section">
+                        <div class="section-header">📊 Detalhes por Trajeto</div>
+                        <div id="statsTripBreakdown"></div>
+                    </div>
+                </div>
             </div>
-            <button class="btn-primary btn-danger" id="clearMonth">🗑️ Limpar Mês</button>
-        </div>
 
-        <!-- Credits -->
-        <div class="credits">
-            Desenvolvido por <a href="https://github.com/berelels" target="_blank">@berelels</a>
-        </div>
-    </div>
+            <!-- ===== TAB: ROTAS ===== -->
+            <div class="tab-pane" id="tabRoutes">
+                <div class="tab-scroll">
 
-    <!-- Modal for Student Selection -->
+                    <!-- Configurações -->
+                    <div class="routes-section">
+                        <div class="section-header">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                </path>
+                            </svg>
+                            Configurações
+                        </div>
+                        <div class="settings-grid">
+                            <div class="setting-item">
+                                <label class="setting-label">⛽ Preço da Gasolina</label>
+                                <div class="input-with-unit">
+                                    <span class="unit-prefix">R$</span>
+                                    <input type="number" id="gasolinePriceInput" class="setting-input" step="0.01"
+                                        min="0" placeholder="6.20">
+                                    <span class="unit-suffix">/L</span>
+                                </div>
+                            </div>
+                            <div class="setting-item">
+                                <label class="setting-label">🚗 km por Litro</label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="carEfficiencyInput" class="setting-input" step="0.5"
+                                        min="1" placeholder="10">
+                                    <span class="unit-suffix">km/L</span>
+                                </div>
+                                <span class="setting-hint">Quantos km o carro anda com 1 litro</span>
+                            </div>
+                        </div>
+                        <button class="btn-primary btn-save" id="saveSettingsBtn">💾 Salvar Configurações</button>
+                    </div>
+
+                    <!-- Percursos -->
+                    <div class="routes-section">
+                        <div class="section-header">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 12h18M3 6h18M3 18h18" />
+                            </svg>
+                            Percursos Cadastrados
+                        </div>
+                        <div id="routesList"></div>
+                        <div class="add-route-form">
+                            <input type="text" id="routeNameInput" class="add-input" placeholder="Ex: UFMG → Casa"
+                                autocomplete="off">
+                            <div class="route-distance-row">
+                                <input type="number" id="routeDistanceInput" class="add-input"
+                                    placeholder="Distância (km)" step="0.1" min="0.1">
+                                <button id="addRouteBtn" class="add-btn">+ Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calculadora Rápida -->
+                    <div class="routes-section">
+                        <div class="section-header">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="2" width="16" height="20" rx="2" />
+                                <line x1="8" y1="6" x2="16" y2="6" />
+                                <line x1="8" y1="10" x2="16" y2="10" />
+                                <line x1="8" y1="14" x2="12" y2="14" />
+                            </svg>
+                            Calculadora Rápida
+                        </div>
+                        <div class="calc-body">
+                            <label class="field-label">Percurso</label>
+                            <select id="calcRouteSelect" class="field-select"></select>
+
+                            <label class="field-label" style="margin-top:1rem;">Tipo de Trajeto</label>
+                            <div class="trip-type-toggle">
+                                <button class="trip-btn active" id="calcTripRound" data-type="round">🔄 Ida e
+                                    Volta</button>
+                                <button class="trip-btn" id="calcTripOne" data-type="one-way">➡️ 1 Viagem</button>
+                            </div>
+
+                            <label class="field-label" style="margin-top:1rem;">Número de Pessoas</label>
+                            <input type="number" id="calcPeople" class="setting-input" min="1" value="3"
+                                style="width:80px;">
+
+                            <div class="cost-result-box" id="calcResult">
+                                <p class="cost-hint">Selecione um percurso para ver o cálculo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== TAB: SOBRE ===== -->
+            <div class="tab-pane" id="tabAbout">
+                <div class="tab-scroll">
+
+                    <!-- Dev Card (centralizado) -->
+                    <div class="about-dev-section">
+                        <img src="pfp.jpeg" alt="Gabriel" class="dev-avatar-lg dev-avatar-photo">
+                        <div class="dev-name-lg">Gabriel Dias Neves</div>
+                        <div class="dev-role-lg">Desenvolvedor Full Stack &amp; Python</div>
+                        <a href="https://github.com/berelels" target="_blank" class="github-btn github-btn-centered">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.87 10.95.58.1.79-.25.79-.56v-2.05c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.27-1.7-1.27-1.7-1.04-.71.08-.7.08-.7 1.15.08 1.75 1.18 1.75 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.27-5.23-5.67 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11.1 11.1 0 0 1 2.89-.39c.98 0 1.97.13 2.89.39 2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.66.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.56C20.2 21.42 23.5 17.1 23.5 12 23.5 5.65 18.35.5 12 .5z" />
+                            </svg>
+                            @berelels no GitHub
+                        </a>
+                    </div>
+
+                    <!-- Apoiar (centralizado) -->
+                    <div class="about-donate-section">
+                        <div class="donate-title">❤️ Apoiar o Projeto</div>
+                        <p class="donate-desc">Se o Caronômetro te ajuda no dia a dia, considera um cafezinho? ☕</p>
+                        <div class="donate-buttons">
+                            <a class="donate-btn donate-btn-sm"
+                                href="https://nubank.com.br/cobrar/1ew74l/69fa56c7-18e1-4c9e-8b47-b6740d52be14"
+                                target="_blank" rel="noopener">
+                                <span class="donate-emoji">💚</span>
+                                <span class="donate-label">Doar</span>
+                                <span class="donate-value">R$4,99</span>
+                            </a>
+                            <a class="donate-btn donate-btn-lg"
+                                href="https://nubank.com.br/cobrar/1ew74l/69fa56e1-6ddc-431f-be27-27c958f3fd15"
+                                target="_blank" rel="noopener">
+                                <span class="donate-emoji">💜</span>
+                                <span class="donate-label">Doar</span>
+                                <span class="donate-value">R$9,99</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sobre o Projeto -->
+                    <div class="routes-section">
+                        <div class="section-header">🚗 Sobre o Projeto</div>
+                        <p class="about-pix-desc" style="margin:0;line-height:1.6;">O Caronômetro nasceu da necessidade
+                            de controlar de forma simples quem deu carona, para quem, e quanto cada um gastou. Um app
+                            pensado para quem divide trajetos com amigos no dia a dia.</p>
+                    </div>
+
+                    <!-- Versão -->
+                    <div class="about-version-footer">
+                        <div class="about-app-icon-sm">🚗</div>
+                        <div class="about-version-name">Caronômetro!</div>
+                        <div class="about-version-tag">Versão 1.2</div>
+                        <div class="about-version-made">Feito com com carinho em Minas Gerais.</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /tab-content -->
+
+        <!-- Bottom Navigation (4 abas) -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" id="navCalendar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Calendário</span>
+            </button>
+            <button class="nav-btn" id="navStats">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Stats</span>
+            </button>
+            <button class="nav-btn" id="navRoutes">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                <span>Rotas</span>
+            </button>
+            <button class="nav-btn" id="navAbout">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>Sobre</span>
+            </button>
+        </nav>
+
+    </div><!-- /app-container -->
+
+    <!-- ===== MODAL: CARONA (2 passos) ===== -->
     <div class="modal-overlay" id="rideModal">
         <div class="modal-content">
             <div class="modal-handle"></div>
-            <div class="modal-title">Quem deu carona?</div>
-            <div id="studentOptionsContainer">
-                <!-- Opções geradas via JS -->
+
+            <!-- Passo 1: Motorista -->
+            <div id="modalStep1">
+                <div class="modal-title" id="rideModalTitle">Quem dirigiu?</div>
+                <div id="studentOptionsContainer"></div>
+                <div class="student-option clear" id="clearDayOption">
+                    <span>❌ Limpar este dia</span>
+                </div>
             </div>
-            <div class="student-option clear" id="clearDayOption">
-                <span>❌ Limpar este dia</span>
+
+            <!-- Passo 2: Passageiros + Percurso -->
+            <div id="modalStep2" class="step-hidden">
+                <div class="step2-header">
+                    <button class="back-btn" id="backToStep1">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                        Voltar
+                    </button>
+                    <div class="modal-title" id="step2DriverName" style="margin-bottom:0;">Passageiros</div>
+                </div>
+
+                <div class="passenger-all-row">
+                    <span class="field-label" style="margin:0;">Quem foi junto?</span>
+                    <button class="all-toggle-btn" id="toggleAllPassengers">Todos ✓</button>
+                </div>
+                <div id="passengerCheckboxes"></div>
+
+                <div class="modal-divider"></div>
+
+                <label class="field-label">Percurso Realizado</label>
+                <select id="rideRouteSelect" class="field-select">
+                    <option value="">Nenhum (sem cálculo de custo)</option>
+                </select>
+
+                <label class="field-label" style="margin-top:1rem;">Tipo de Trajeto</label>
+                <div class="trip-type-toggle">
+                    <button class="trip-btn active" id="rideTripRound" data-type="round">🔄 Ida e Volta</button>
+                    <button class="trip-btn" id="rideTripOne" data-type="one-way">➡️ 1 Viagem</button>
+                </div>
+
+                <div class="cost-result-box" id="rideCostPreview" style="display:none;"></div>
+
+                <button class="btn-primary" id="confirmRideBtn" style="margin-top:1.25rem;">✅ Confirmar Carona</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal for Settings (Manage Students) -->
+    <!-- ===== MODAL: GERENCIAR PESSOAS ===== -->
     <div class="modal-overlay" id="settingsModal">
         <div class="modal-content">
             <div class="modal-handle"></div>
             <div class="modal-title">Gerenciar Pessoas</div>
-
-            <div class="manage-list" id="manageList">
-                <!-- Lista gerada via JS -->
-            </div>
-
+            <div class="manage-list" id="manageList"></div>
             <div class="add-form">
                 <input type="text" id="newStudentName" class="add-input" placeholder="Nome da pessoa..."
                     autocomplete="off">
                 <input type="color" id="newStudentColor" class="color-input" value="#84cc16">
                 <button id="addStudentBtn" class="add-btn">Add</button>
             </div>
-
             <button class="btn-primary" id="closeSettingsModal">Concluído</button>
         </div>
     </div>
