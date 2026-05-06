@@ -33,7 +33,6 @@ Decidi compartilhá-lo publicamente porque acredito que mais pessoas passam pela
 - 📲 **Instalável como app** — funciona offline após instalado
 > **💡 Primeiros passos:** O app já vem sem usuários. Fique à vontade para removê-los e adicioná-los — basta tocar no ícone de ⚙️ configurações no canto superior direito!
 
-> **💡 Primeiros passos:** O app já vem com algumas pessoas de exemplo cadastradas (Camila, Luna e Manu). Fique à vontade para removê-las e adicionar os nomes que fazem sentido pra você — basta tocar no ícone de ⚙️ configurações no canto superior direito!
 
 ---
 
