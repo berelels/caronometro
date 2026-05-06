@@ -642,7 +642,48 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 // ==========================================
+// DONATION BANNER
+// ==========================================
+const DONATE_INTERVAL_DAYS = 7;
+const DONATE_MIN_RIDES      = 5;
+
+function countTotalRides() {
+    let total = 0;
+    Object.values(ridesData).forEach(month => {
+        total += Object.keys(month).length;
+    });
+    return total;
+}
+
+function shouldShowDonateBanner() {
+    if (countTotalRides() < DONATE_MIN_RIDES) return false;
+    const lastShown = parseInt(localStorage.getItem('donateBannerLastShown') || '0');
+    const daysSince = (Date.now() - lastShown) / (1000 * 60 * 60 * 24);
+    return daysSince >= DONATE_INTERVAL_DAYS;
+}
+
+function showDonateBanner() {
+    if (!shouldShowDonateBanner()) return;
+    // Delay 3s so the user settles into the app first
+    setTimeout(() => {
+        document.getElementById('donateBanner').classList.add('show');
+    }, 3000);
+}
+
+function dismissDonateBanner() {
+    document.getElementById('donateBanner').classList.remove('show');
+    localStorage.setItem('donateBannerLastShown', Date.now().toString());
+}
+
+document.getElementById('donateBannerClose').addEventListener('click', dismissDonateBanner);
+document.getElementById('donateBannerCta').addEventListener('click', () => {
+    dismissDonateBanner();
+    switchTab('about');
+});
+
+// ==========================================
 // INIT
 // ==========================================
 renderModalOptions();
 generateCalendar();
+showDonateBanner();

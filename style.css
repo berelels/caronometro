@@ -218,6 +218,43 @@ body {
 .about-version-tag { font-size: .75rem; color: #9ca3af; font-weight: 600; }
 .about-version-made { font-size: .72rem; color: #d1d5db; margin-top: .3rem; }
 
+/* ── DONATION BANNER ── */
+.donate-banner {
+    position: fixed; bottom: 58px; left: 50%; transform: translateX(-50%) translateY(120%);
+    width: calc(100% - 1.5rem); max-width: 462px;
+    background: linear-gradient(135deg, #5b21b6, #7c3aed);
+    border-radius: 1rem 1rem 0 0;
+    padding: .85rem 1rem;
+    display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+    box-shadow: 0 -4px 24px rgba(124,58,237,.35);
+    z-index: 90; transition: transform .4s cubic-bezier(.4,0,.2,1);
+    pointer-events: none; opacity: 0;
+}
+.donate-banner.show {
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto; opacity: 1;
+}
+.donate-banner-content { display: flex; align-items: center; gap: .6rem; flex: 1; min-width: 0; }
+.donate-banner-icon { font-size: 1.4rem; flex-shrink: 0; }
+.donate-banner-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.donate-banner-text strong { font-size: .88rem; font-weight: 700; color: white; white-space: nowrap; }
+.donate-banner-text span { font-size: .78rem; color: rgba(255,255,255,.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.donate-banner-actions { display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
+.donate-banner-btn {
+    background: white; color: #7c3aed; border: none; border-radius: 2rem;
+    padding: .4rem .9rem; font-size: .82rem; font-weight: 700;
+    cursor: pointer; transition: all .2s; white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+}
+.donate-banner-btn:hover { background: #f5f3ff; transform: scale(1.04); }
+.donate-banner-close {
+    background: rgba(255,255,255,.2); border: none; color: white;
+    width: 28px; height: 28px; border-radius: 50%; font-size: 1.1rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background .2s; flex-shrink: 0; line-height: 1;
+}
+.donate-banner-close:hover { background: rgba(255,255,255,.35); }
+
 /* ── MODALS ── */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); display: flex; align-items: flex-end; justify-content: center; z-index: 100; opacity: 0; transition: opacity .3s ease; pointer-events: none; }
 .modal-overlay.active { opacity: 1; pointer-events: auto; }
